@@ -1,0 +1,16 @@
+{
+  "name": "js-library.starlight-hotel-ranking-bot",
+  "version": "1.0.0",
+  "description": "Starlight Hotel Ranking Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Jose Manuel Ortega Torres",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "noblox.js": "^4.15.1"
+  }
+}
