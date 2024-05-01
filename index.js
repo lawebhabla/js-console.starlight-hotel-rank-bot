@@ -25,9 +25,12 @@ noblox.setCookie(cookie).then(function(currentUser) {
             .then(() => {
                 const message = `Establecido ranking ${rankId} para el usuario ${userId}`;
                 res.send(message);
+                console.log(message);
             })
             .catch((error) => {
-                res.status(500).send(`Error al establecer el rango: ${error.message}`);
+                const message = `ERROR Estableciendo ranking ${rankId} para el usuario ${userId}: ${error.message}`;
+                res.status(500).send(message);
+                console.log(message);
             });
         }
     });
