@@ -1,4 +1,15 @@
 # Ejemplo de llamada
-http://{host}:{port}/?userId={userID}&rankId={rankId}
+## Seteo de ranking concreto a userId concreto
+http://{host}:{port}/user/{UserID}/rank/{RankID}
 
-# npm start
+Ejemplo:
+http://localhost:8080/user/12345678/rank/2
+
+## Seteo de ranking concreto a una lista de usersIds separados por comas
+http://{host}:{port}/users/{ListaUserIDsSeparadosPorComas}/rank/{RankID}
+
+Ejemplo:
+http://localhost:8080/users/12345678,23456789,34567890/rank/2
+
+# Comando para arrancar el programa
+npm start
