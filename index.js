@@ -26,20 +26,19 @@ async function setRankingUsuario(groupId, userId, rankId) {
 
 // Establece el ranking de una lista de usuarios separados por comas
 async function setRankingListaUsuarios(groupId, userIdList, rankId) {
-    let resultado = {
-        success: true,
-        message: ''
-    }    
+    const resultados = [];   
     const usuarios = userIdList.split(',');
 
   // Recorrer la lista y establecer el ranking para cada usuario
   for (const userId of usuarios) {
     const result = await setRankingUsuario(groupId, parseInt(userId), rankId);
-    resultado.message += result.message + '\n';
-    if (!result.success) resultado.success = false;
+    resultados.push(result);
   }
 
-  return resultado;
+  return { 
+    success: resultados.every(result => result.success), 
+    message: resultados
+  };
 }
 
 noblox.setCookie(cookie).then(function(currentUser) {
@@ -57,11 +56,7 @@ noblox.setCookie(cookie).then(function(currentUser) {
         else {
             // Seteamos el ranking al usuario
             const result = await setRankingUsuario(groupId, userId, rankId);
-            if (result.success) {
-              res.status(200).json(result.message);
-            } else {
-              res.status(500).json(result.message);
-            }
+            res.status(result.success ? 200 : 500).json(result);
         }        
     });
 
@@ -77,11 +72,7 @@ noblox.setCookie(cookie).then(function(currentUser) {
         else {
             // Seteamos el ranking al usuario
             const result = await setRankingListaUsuarios(groupId, userIdList, rankId);
-            if (result.success) {
-              res.status(200).json(result.message);
-            } else {
-              res.status(500).json(result.message);
-            }
+            res.status(result.success ? 200 : 500).json(result);
         }   
     });
 
