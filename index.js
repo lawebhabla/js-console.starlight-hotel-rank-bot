@@ -44,6 +44,16 @@ async function setRankingListaUsuarios(groupId, userIdList, rankId) {
 noblox.setCookie(cookie).then(function(currentUser) {
     console.log(`Logged in as ${currentUser.UserName}`);
 
+    // Ayuda
+    app.get('/', async (req, res) => {
+        let codigoHTMLHelp = "<html><head></head><body>";
+        codigoHTMLHelp += "<h1>Sintax</h1>";
+        codigoHTMLHelp += "<p>Set rankID to UserID: <i>/user/:userid/rank/:rankid</i> </p>";
+        codigoHTMLHelp += "<p>Set rankID to a UserID list: <i>/users/:useridlist/rank/:rankid</i> </p>";
+        codigoHTMLHelp += "</body></html>";
+        res.status(200).send(codigoHTMLHelp)
+    });
+
     // Seteo de ranking concreto a userId concreto
     app.get('/user/:userid/rank/:rankid', async (req, res) => {
         const userId = parseInt(req.params.userid);
